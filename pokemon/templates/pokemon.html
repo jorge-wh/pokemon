@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pokemon</title>
+    <style type="text/css">
+    .contenedor{
+        width: 960px;
+        margin: 0 auto;
+        background: aliceblue;
+    }
+    .contenedor2{
+        width: 960px;
+        margin: 0 auto;
+        background:aliceblue;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .caja{
+        width: 30%;
+        border: 1px solid black;
+        margin: 10px 0 10px 0;
+    }
+    h1{
+        text-align: center
+    }
+    .boton:hover{
+        background: black !important;
+    }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Lista de Pokemons</h1>
+    </div>
+    <div class="contenedor2">
+        <!-- {% for pokemon in pokemons%}
+        <div class="caja">
+            <h2 style="text-align: center;">{{ pokemon.name }}</h2>
+            <div class="imagen" style="width: 50%; margin: 0 auto;">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png" alt="" style="text-align: center;">
+            </div>
+        </div>
+        {% endfor %} -->
+        {% for key, value in dict_img_pokemon.items %}
+        <div class="caja">
+            <h2 style="text-align: center;">{{ key }}</h2>
+            <div class="imagen" style="width: 50%; margin: 0 auto;">
+                <img src="{{ value.img }}" alt="" style="text-align: center;">
+            </div>
+            <p style="text-align: center;">
+                <a class="boton" target="_blank" href="/ver-pokemon/?url={{ value.url }}" style="text-align: center; text-decoration: none; padding: 3px 4px; background: grey; color: white; border-radius: 3px;">
+                    Ver Pokemon
+                </a>
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

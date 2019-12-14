@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Descripcion Pokemon</title>
+    <style type="text/css">
+    .contenedor{
+        width: 960px;
+        background: aliceblue;
+        margin: 0 auto;
+    }
+    .contenedor2{
+        width: 960px;
+        background: aliceblue;
+        margin: 0 auto;
+    }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <h1 style="text-align: center;">{{ nombre }}</h1>
+    </div>
+    <div class="contenedor2">
+        <div class="imagen" style="width: 100%;">
+            <p><img src="{{ imagen }}" style="width: 20%; margin: 0 auto; text-align: center;" alt=""></p>
+        </div>
+        <h2 style="text-align: center;">Detalles de las caracteristicas</h2>
+        <h3><strong>Peso: </strong>{{ peso }}</h3>
+        <h3><strong>Altura: </strong>{{ altura }}</h3>
+        <h3><strong>Tipo: 
+            {% for tipo in tipos %}
+                <a href="/ver-tipo/?tipo={{ tipo.type.name }}&url={{ tipo.type.url }}" target="_blank">{{ tipo.type.name }},</a>
+            {% endfor %}
+        </strong></h3>
+        <h3><strong>Habilidades: 
+            {% for habilidad in habilidades %}
+                {{ habilidad.ability.name }},
+            {% endfor %}
+        </strong></h3>
+        <h3><strong>Movimientos: 
+            {% for movimiento in movimientos %}
+                {{ movimiento.move.name }},
+            {% endfor %}
+        </strong></h3>
+    </div>
+</body>
+</html>
