@@ -27,7 +27,7 @@ def pokemon(request):
         response_pokemon_dumps = json.dumps(response_pokemon.content)
         response_pokemon_dict = json.loads(response_pokemon_dumps)
         response_pokemon_dict = json.loads(response_pokemon_dict)
-        imagen = response_pokemon_dict.get("sprites").get('front_default')
+        imagen = response_pokemon_dict.get("sprites").get('back_default')
 
         dict_img_pokemon[nombre_pokemon] = {
             "url": url_pokemon,
@@ -44,7 +44,7 @@ def descripcion_pokemon(request):
     response_dumps = json.dumps(response.content)
     response_dict = json.loads(response_dumps)
     response_dict = json.loads(response_dict)
-    imagen = response_dict.get('sprites').get('front_default')
+    imagen = response_dict.get('sprites').get('back_default')
     nombre = response_dict.get('name')
     peso = response_dict.get('weight')
     altura = response_dict.get('height')
