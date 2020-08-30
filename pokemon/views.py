@@ -27,7 +27,7 @@ def pokemon(request):
         response_pokemon_dumps = json.dumps(response_pokemon.content)
         response_pokemon_dict = json.loads(response_pokemon_dumps)
         response_pokemon_dict = json.loads(response_pokemon_dict)
-        imagen = response_pokemon_dict.get("sprites").get('back_default')
+        imagen = response_pokemon_dict.get("sprites").get('front_default')
 
         dict_img_pokemon[nombre_pokemon] = {
             "url": url_pokemon,
@@ -82,3 +82,13 @@ def tipo_pokemon(request):
         }
 
     return render(request, 'tipo_pokemon.html', {'pokemons': dict_pokemons, 'tipo': tipo})
+
+
+def onus(request):
+    return render(request, 'onu.html', {})
+
+def pre_message_async(request):
+    return render(request, 'example.html',)
+
+def home(request):
+    return render(request, 'home.html')

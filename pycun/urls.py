@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from pokemon.views import pokemon, descripcion_pokemon, tipo_pokemon
+from pokemon.views import pokemon, descripcion_pokemon, tipo_pokemon, onus, pre_message_async, home
 
 urlpatterns = [
+    url(r'^$', home),
     url(r'^pokemon/$', pokemon),
     url(r'^admin/', admin.site.urls),
     url(r'^ver-pokemon/$', descripcion_pokemon),
     url(r'^ver-tipo/$', tipo_pokemon),
+    url(r'^onus/$', onus),
+    # url(r'^pre-message_async/$', pre_message_async),
 ]

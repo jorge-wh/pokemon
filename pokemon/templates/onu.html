@@ -1,0 +1,266 @@
+{% extends 'wisp/base.html' %}
+{% load static from staticfiles %}
+{% load i18n widget_tweaks %}
+{% load wisp_tags %}
+
+{% block metatags %}
+    <title>Lista de ONUS - {{ request.user.perfilusuario.empresa }}</title>
+    <meta name="description" content="{{ titulo }}">
+    <style type="text/css">
+        /* Style the Image Used to Trigger the Modal */
+    /* #myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    } */
+
+    /* #myImg:hover {opacity: 0.7;} */
+
+    /* The Modal (background) */
+    /*.modal {
+        display: block;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.9)
+    }*/
+
+    /* Modal Content (Image) */
+    /* .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    } */
+
+    /* Caption of Modal Image (Image Text) - Same Width as the Image */
+    /* #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    } */
+
+    /* Add Animation - Zoom in the Modal */
+    /* .modal-content, #caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    } */
+
+    /* @keyframes zoom {
+        from {transform:scale(0)}
+        to {transform:scale(1)}
+    } */
+
+    /* The Close Button */
+    /* .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    } */
+
+    /* 100% Image Width on Smaller Screens */
+    /* @media only screen and (max-width: 700px){
+        .modal-content {
+            width: 100%;
+        }
+    } */
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-header">
+            <!-- page title -->
+            <h1 class="pull-left">
+                <i class="fa fa-file-text-o"></i>
+                <span>Lista de ONUS - {{ request.user.perfilusuario.empresa }}</span>
+            </h1>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-content">
+                    <div class="responsive-table">
+                        <div class="scrollable-area" id="basic-datatable-preview">
+                            <table id="basicDatatable" class="data-table-column-filter table table-bordered table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Olt</th>
+                                        <th>Board</th>
+                                        <th>Port</th>
+                                        <th>SN</th>
+                                        <th>Type</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Olt</th>
+                                        <th>Board</th>
+                                        <th>Port</th>
+                                        <th>SN</th>
+                                        <th>Type</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div> <!-- end preview-->
+                    </div> <!-- end card body-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <img id="myImg" src="https://wisphub.net/static/img/logo.66536d5eaffa.png" alt="Snow" style="width:100%;max-width:300px"> -->
+
+<!-- <div id="myModal" class="modal" style="display: block; position: fixed; z-index: 1; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.9);">
+    <div id="caption" style="margin: auto; display: block; width: 80%; max-width: 700px; text-align: center; color: #ccc; padding: 10px 0; height: 150px;">
+        <div class="jobstatic-panel" style="background: white; margin: 0; top: 60px; padding: 10px; position: relative; text-align: center;">
+            <p class="title-job" style="color: black;"><i class="fa fa-hourglass-start"></i><span> Un momento por favor procesando tarea.</span></p>
+            <h5>Si este mensaje no se actualiza en 2 minutos favor de reportarlo.</h5>
+        </div>
+    </div>
+</div> -->
+
+{% endblock %}
+
+{% block extra_resources %}
+<input id="WEBSOCKET_URI" type="hidden" value="ws://bitol1.bitolluis.com:8000/ws/">
+<script type="text/javascript" src="{% static 'js/ws4redis.js' %}"></script>
+<script src="{% static 'js/websocket-adminolt.js' %}" type="text/javascript"></script>
+<script type="text/javascript">
+    // Get the modal
+    // var modal = document.getElementById("myModal");
+
+    // // Get the image and insert it inside the modal - use its "alt" text as a caption
+    // var img = document.getElementById("myImg");
+    // var modalImg = document.getElementById("img01");
+    // var captionText = document.getElementById("caption");
+    // img.onclick = function(){
+    //     modal.style.display = "block";
+    //     modalImg.src = this.src;
+    //     captionText.innerHTML = this.alt;
+    // }
+    // modal.style.display = "block";
+    // modalImg.src = this.src;
+    // captionText.innerHTML = this.alt;
+    // captionText.innerHTML = image.alt
+    // Get the <span> element that closes the modal
+    // var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    // span.onclick = function() {
+    //     modal.style.display = "none";
+    // }
+    jQuery(document).ready(function() {
+        get_unauthorized_onus();
+
+        /* reload unauthorized onus listener */
+        // $('#reload_unauthorized_onus').click(function() {
+        //     get_unauthorized_onus();
+        // });
+
+        // $('.link-action').click(function() {
+        //     const url = $(this).data('url');
+        //     const name = $(this).data('name');
+
+        //     $('#buttonDropDown').html(name);
+        //     $('#selected_olt_url').val(url); 
+        //     get_unauthorized_onus(url)
+        // });
+    });
+    function get_unauthorized_onus() {
+        // url = $('#selected_olt_url').val(); 
+        // url = 'https://55893e6db716.ngrok.io/api/onu/unauthorized/999/'
+        url = 'http://bitol1.bitolluis.com:8000/api/onu/unauthorized/999/'
+        $.get({
+            // type: "GET",
+            url: url,
+            headers: {
+                Authorization: "Token a8711dd07dac2dc4a680189d7a91ae2a69eef5bf",
+                // 'Access-Control-Allow-Origin': 'http://bitol1.bitolluis.com:8000/api/onu/unauthorized/999/',
+                // 'Access-Control-Allow-Origin': "https://4e46251277e8.ngrok.io",
+                // 'Access-Control-Request-Method': 'GET',
+                // 'Access-Control-Allow-Headers': "Authorization",
+            },
+            dataType: "json",
+
+            success: function (data) { 
+                console.log("Respuesta: "+ data);
+                task_adminolt_ajax(data.facility);
+                
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        });
+        console.log('ready', url);
+    }
+    function task_custom_done(data){
+        populateTable(data);
+        $(".loading-gif, .jobstatic-panel").hide();
+    }
+    function populateTable(data) {
+        let table = $("#basicDatatable").DataTable();
+        table.rows().remove().draw();
+        
+        let olts = data.unauthorized_onus;
+        
+        //console.log(olts);
+        olts.map(olt => {
+            let boards = Object.keys(olt);
+            boards.map(board => {
+                /*if (olt[board]['count'] > 0) {
+                }*/
+
+                let onus = Object.keys(olt[board]['onus']);
+                onus.map(onu => {
+                    let onuObject = olt[board]['onus'][onu]
+                    let row = [
+                        onuObject.olt,
+                        olt[board]['if'],
+                        olt[board]['port'],
+                        onuObject.sn,
+                        onuObject.type,
+                        onuObject.actions,
+                    ];
+
+                    table.row.add(row).draw(false);
+                })
+            });
+        });
+    }
+</script>
+
+{% endblock %}
