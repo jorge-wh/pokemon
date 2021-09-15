@@ -66,29 +66,28 @@ x-tagGroups:
       - user
 paths:
   /zones:
-    '/zones/':
-      get:
-        tags:
-        - zones
-        summary: Get all zones
-        description: Return all zones
-        operationId: getZonesAll
-        responses:
-          '200':
-            description: successful operation
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/Pet'
-              application/xml:
-                schema:
-                  $ref: '#/components/schemas/Pet'
-          '400':
-            description: Invalid ID supplied
-          '404':
-            description: Pet not found
-        security:
-          - api_key: []
+    get:
+      tags:
+      - zones
+      summary: Get all zones
+      description: Return all zones
+      operationId: getZonesAll
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Pet not found
+      security:
+        - api_key: []
 
   /pet:
     parameters:
