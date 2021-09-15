@@ -1,9 +1,7 @@
 openapi: 3.0.0
 servers:
-  - url: //petstore.swagger.io/v2
+  - url: //subdomain.adminolt.com/v1
     description: Default server
-  - url: //petstore.swagger.io/sandbox
-    description: Sandbox server
 info:
   description: |
     This is a sample server Petstore server.
@@ -47,7 +45,7 @@ externalDocs:
   description: Find out how to create Github repo for your OpenAPI spec.
   url: 'https://github.com/Rebilly/generator-openapi-repo'
 tags:
-  - name: zones
+  - name: Zones
     description: Everything about your Zones
   - name: pet
     description: Everything about your Pets
@@ -67,6 +65,31 @@ x-tagGroups:
     tags:
       - user
 paths:
+  /zones:
+    '/zones/':
+      get:
+        tags:
+        - zones
+        summary: Get all zones
+        description: Return all zones
+        operationId: getZonesAll
+        responses:
+          '200':
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Pet'
+              application/xml:
+                schema:
+                  $ref: '#/components/schemas/Pet'
+          '400':
+            description: Invalid ID supplied
+          '404':
+            description: Pet not found
+        security:
+          - api_key: []
+
   /pet:
     parameters:
       - name: cookieParam
