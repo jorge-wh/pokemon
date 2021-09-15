@@ -31,15 +31,15 @@ info:
     All responses have a wildcard same-origin which makes them completely public and accessible to everyone, including any code on any site.
 
   version: 1.0.0
-  title: Swagger Petstore
-  termsOfService: 'http://swagger.io/terms/'
+  title: Api AdminOLT
+  termsOfService: 'https://adminolt.com/documentacion/terminos-y-condiciones-de-uso-5/'
   contact:
-    name: API Support
-    email: apiteam@swagger.io
-    url: https://github.com/Redocly/redoc
+    name: API Support AdminOLT
+    email: apiteam@adminolt.com
+    url: https://adminolt.com/
   x-logo:
-    url: 'https://redocly.github.io/redoc/petstore-logo.png'
-    altText: Petstore logo
+    url: 'https://admin.adminolt.com/static/img/logo.84639b0d929a.png'
+    altText: AdminOLT logo
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
@@ -47,6 +47,8 @@ externalDocs:
   description: Find out how to create Github repo for your OpenAPI spec.
   url: 'https://github.com/Rebilly/generator-openapi-repo'
 tags:
+  - name: zones
+    description: Everything about your Zones
   - name: pet
     description: Everything about your Pets
   - name: store
@@ -54,6 +56,9 @@ tags:
   - name: user
     description: Operations about user
 x-tagGroups:
+  - name: Sistema
+    tags:
+      - zones
   - name: General
     tags:
       - pet
