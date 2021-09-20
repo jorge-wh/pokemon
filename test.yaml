@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: //subdomain.adminolt.com/v1
+  - url: //subdomain.adminolt.com/api
     description: Default server
 info:
   description: |
@@ -56,7 +56,7 @@ tags:
 x-tagGroups:
   - name: Sistema
     tags:
-      - zones
+      - Zones
   - name: General
     tags:
       - pet
@@ -68,7 +68,7 @@ paths:
   /zones:
     get:
       tags:
-      - zones
+      - Zones
       summary: Get all zones
       description: Return all zones
       operationId: getZonesAll
@@ -78,14 +78,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Pet'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Pet'
-        '400':
-          description: Invalid ID supplied
-        '404':
-          description: Pet not found
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zone'
       security:
         - api_key: []
 
@@ -773,6 +768,24 @@ components:
           default: false
       xml:
         name: Order
+    Zone:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+          description: Zone ID
+          minLength: 1
+          example: 1
+        name:
+          type: string
+          description: >-
+            Name of Zone
+          # format: password
+          minLength: 8
+          # pattern: '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])'
+          example: Zone 1
     Pet:
       type: object
       required:
