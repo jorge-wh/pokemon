@@ -100,7 +100,7 @@ paths:
             format: number
       responses:
         '200':
-          description: successful operation
+          description: 'Successful Operation'
           content:
             application/json:
               schema:
