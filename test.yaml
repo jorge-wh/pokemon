@@ -83,7 +83,38 @@ paths:
                   $ref: '#/components/schemas/Zone'
       security:
         - api_key: []
-
+  /zones/create:
+    post:
+      tags:
+      - Zones
+      summary: Create new zone
+      description: Add new zone
+      operationId: createZones
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                Name:
+                  description: Name of the zone
+                  type: string
+                Description:
+                  description: Description of the zone
+                  type: string
+        required: true   
+      responses:
+        '200':
+          description: 'Successful Operation'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateZone'
+      security:
+        - api_key: []
+      
   /pet:
     parameters:
       - name: cookieParam
@@ -786,6 +817,30 @@ components:
           minLength: 8
           # pattern: '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])'
           example: Zone 1
+    CreateZone:
+      type: object
+      properties:
+        message:
+          type: string
+          description: 'Indicates the response'
+          example: 'Zone created successfully'
+        data:
+          description: 'Data of the Zone'
+          type: object
+          properties:
+            id:
+              type: integer
+              description: 'ID of the Zone'
+              example: 1
+            name:
+              type: string
+              description: 'Name of the Zone'
+              example: 'Zona 1'
+            description:
+              type: string
+              description: 'Description of the Zone'
+              example: 'This is my Zone'
+          
     Pet:
       type: object
       required:
