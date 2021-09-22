@@ -88,7 +88,7 @@ paths:
       tags:
       - Zones
       summary: Get a zone by ID
-      description: Return a zone by ID. If ID doesn't exit get all the zones 
+      description: Return a zone by ID. If ID doesn't exist get all the zones 
       operationId: getZonesByID
       parameters:
         - name: zone_id
