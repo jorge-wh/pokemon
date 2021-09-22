@@ -87,8 +87,8 @@ paths:
     post:
       tags:
       - Zones
-      summary: Creates new zone
-      description: Adds new zone
+      summary: Creates a new zone
+      description: Adds a new zone
       operationId: createZones
       requestBody:
         content:
