@@ -83,6 +83,32 @@ paths:
                   $ref: '#/components/schemas/Zone'
       security:
         - api_key: []
+  '/zones/{zone_id}':
+    get:
+      tags:
+      - Zones
+      summary: Get a zone by ID
+      description: Return a zone by ID. If ID doesn't exit get all the zones 
+      operationId: getZonesByID
+      parameters:
+        - name: zone_id
+          in: path
+          description: ID of zone to return
+          required: true
+          schema:
+            type: integer
+            format: number
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zone'
+      security:
+          - api_key: []
   /zones/create:
     post:
       tags:
