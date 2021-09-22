@@ -163,7 +163,7 @@ paths:
       parameters:
         - name: zone_id
           in: path
-          description: Zone id to delete
+          description: ID of zone to delete
           required: true
           schema:
             type: integer
@@ -899,7 +899,7 @@ components:
             name:
               type: string
               description: 'Name of the Zone'
-              example: 'Zona 1'
+              example: 'Zone 1'
             description:
               type: string
               description: 'Description of the Zone'
@@ -922,11 +922,11 @@ components:
             name:
               type: string
               description: 'Name of the Zone'
-              example: 'Zona 1'
+              example: 'Zone 1'
             description:
               type: string
               description: 'Description of the Zone'
-              example: 'This is my Zone'
+              example: 'This is my new Zone'
     DeleteZone:
       type: object
       properties:
