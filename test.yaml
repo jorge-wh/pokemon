@@ -302,7 +302,7 @@ paths:
             
             data = {
                 "name": "Zone 1-1",
-                "description": "This is my new description"
+                "description": "This is my new Zone"
             }
             
             response = requests.put(url=endpoint, headers=headers, data=data)
