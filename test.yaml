@@ -80,7 +80,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Zone'
+                  $ref: '#/components/schemas/ZoneResponse'
         '203':
           description: Non-Authoritative Information
           content:
@@ -196,7 +196,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Zone'
+                  $ref: '#/components/schemas/ZoneResponse'
         '203':
           description: Non-Authoritative Information
           content:
