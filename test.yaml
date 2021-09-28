@@ -74,7 +74,7 @@ paths:
       operationId: getZonesAll
       responses:
         '200':
-          description: successful operation
+          description: Successful Operation
           content:
             application/json:
               schema:
@@ -172,7 +172,7 @@ paths:
             response = requests.post(url=endpoint, headers=headers, data=data)
             print(response.content)
       security:
-      - api_key: []
+        - api_key: []
   '/zones/{zone_id}/':
     get:
       tags:
@@ -232,7 +232,7 @@ paths:
             response = requests.get(url=endpoint, headers=headers)
             print(response.content)
       security:
-          - api_key: []
+        - api_key: []
     put:
       tags:
       - Zones
@@ -1062,12 +1062,12 @@ components:
           type: string
           description: Name of Zone
           minLength: 8
-          example: Zone 1
+          example: string
         description:
           type: string
           description: Description of Zone
           minLength: 8
-          example: This is my Zone
+          example: string
     ZoneResponse:
       type: object
       required:
@@ -1265,28 +1265,8 @@ components:
             allOf:
               - description: My Zone
                 title: Zone
-              - $ref: '#/components/schemas/ZoneRequestUpdate'
+              - $ref: '#/components/schemas/ZoneRequest'
       description: Zone object that needs to be update to the system
-      required: true
-    ZoneResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-              - description: My Zone
-                title: Zone
-              - $ref: '#/components/schemas/ZoneResponse'
-      description: Zone object that needs to be added to the system
-      required: true
-    ZoneResponseUpdate:
-      content:
-        application/json:
-          schema:
-            allOf:
-              - description: My Zone
-                title: Zone
-              - $ref: '#/components/schemas/ZoneResponseUpdate'
-      description: Zone object that needs to be update in the system
       required: true
     Pet:
       content:
