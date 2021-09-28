@@ -74,7 +74,7 @@ paths:
       operationId: getZonesAll
       responses:
         '200':
-          description: Successful Operation
+          description: successful operation
           content:
             application/json:
               schema:
@@ -118,14 +118,7 @@ paths:
       description: Add new zone.
       operationId: addZone
       requestBody:
-        content:
-          application/json:
-            schema:
-              example: {
-                "name": "Zone 1",
-                "description": "This is my Zone"
-              }
-                
+        $ref: '#/components/requestBodies/ZoneRequest'
       responses:
         '201':
           description: Created
@@ -134,7 +127,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Zone'
+                  $ref: '#/components/schemas/ZoneResponse'
         '203':
           description: Non-Authoritative Information
           content:
@@ -255,23 +248,16 @@ paths:
             type: integer
             format: number
       requestBody:
-        content:
-          application/json:
-            schema:
-              example: {
-                "name": "Zone 1-1",
-                "description": "This is my new Zone"
-              }
+        $ref: '#/components/requestBodies/ZoneRequestUpdate'
       responses:
         '200':
           description: Successful Operation
           content:
             application/json:
               schema:
-                example: {
-                  "name": "Zone 1-1",
-                  "description": "This is my new Zone"
-                }
+                type: array
+                items:
+                  $ref: '#/components/schemas/ZoneResponseUpdate'
         '203':
           description: Non-Authoritative Information
           content:
@@ -316,7 +302,7 @@ paths:
             
             data = {
                 "name": "Zone 1-1",
-                "description": "This is my new Zone"
+                "description": "This is my new description"
             }
             
             response = requests.put(url=endpoint, headers=headers, data=data)
@@ -1075,7 +1061,22 @@ components:
           default: false
       xml:
         name: Order
-    Zone:
+    ZoneRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of Zone
+          minLength: 8
+          example: Zone 1
+        description:
+          type: string
+          description: Description of Zone
+          minLength: 8
+          example: This is my Zone
+    ZoneResponse:
       type: object
       required:
         - name
@@ -1095,6 +1096,41 @@ components:
           description: Description of Zone
           minLength: 8
           example: This is my Zone
+    ZoneRequestUpdate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of Zone
+          minLength: 8
+          example: Zone 1
+        description:
+          type: string
+          description: Description of Zone
+          minLength: 8
+          example: This is my new Zone
+    ZoneResponseUpdate:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+          description: Zone ID
+          minLength: 1
+          example: 1
+        name:
+          type: string
+          description: Name of Zone
+          minLength: 8
+          example: Zone 1
+        description:
+          type: string
+          description: Description of Zone
+          minLength: 8
+          example: This is my new Zone
     Pet:
       type: object
       required:
@@ -1220,16 +1256,46 @@ components:
       xml:
         name: User
   requestBodies:
-    Zone:
-        content:
-          application/json:
-            schema:
-              allOf:
-                - description: My Zone
-                  title: Zone
-                - $ref: '#/components/schemas/Zone'
-        description: Zone object that needs to be added to the system
-        required: true
+    ZoneRequest:
+      content:
+        application/json:
+          schema:
+            allOf:
+              - description: My Zone
+                title: Zone
+              - $ref: '#/components/schemas/ZoneRequest'
+      description: Zone object that needs to be added to the system
+      required: true
+    ZoneRequestUpdate:
+      content:
+        application/json:
+          schema:
+            allOf:
+              - description: My Zone
+                title: Zone
+              - $ref: '#/components/schemas/ZoneRequestUpdate'
+      description: Zone object that needs to be update to the system
+      required: true
+    ZoneResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+              - description: My Zone
+                title: Zone
+              - $ref: '#/components/schemas/ZoneResponse'
+      description: Zone object that needs to be added to the system
+      required: true
+    ZoneResponseUpdate:
+      content:
+        application/json:
+          schema:
+            allOf:
+              - description: My Zone
+                title: Zone
+              - $ref: '#/components/schemas/ZoneResponseUpdate'
+      description: Zone object that needs to be update in the system
+      required: true
     Pet:
       content:
         application/json:
