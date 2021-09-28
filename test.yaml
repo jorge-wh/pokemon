@@ -65,7 +65,7 @@ x-tagGroups:
     tags:
       - user
 paths:
-  /zones:
+  /zones/:
     get:
       tags:
       - Zones
@@ -74,7 +74,7 @@ paths:
       operationId: getZonesAll
       responses:
         '200':
-          description: successful operation
+          description: Successful Operation
           content:
             application/json:
               schema:
@@ -180,7 +180,7 @@ paths:
             print(response.content)
       security:
       - api_key: []
-  '/zones/{zone_id}':
+  '/zones/{zone_id}/':
     get:
       tags:
       - Zones
@@ -316,7 +316,7 @@ paths:
             
             data = {
                 "name": "Zone 1-1",
-                "description": "This is my new description"
+                "description": "This is my new Zone"
             }
             
             response = requests.put(url=endpoint, headers=headers, data=data)
