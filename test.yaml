@@ -337,14 +337,6 @@ paths:
             application/json:
               example:
                 message_status: "El token enviado no es valido"
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              example:
-                name: [
-                  "Este campo es requerido"
-                ]
         '401': 
           description: Unauthorized
           content:
