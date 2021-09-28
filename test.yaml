@@ -81,8 +81,98 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Zone'
+        '203':
+          description: Non-Authoritative Information
+          content:
+            application/json:
+              example:
+                message_status: "El token enviado no es valido"      
+        '401': 
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                detail: "Las credenciales de autenticación no se proveyeron."
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              example:
+                detail: "Metodo {{put,post,get,delete}} no permitido"
+      x-code-samples:
+        - lang: Python
+          source: |
+            import requests
+            endpoint = "https://{{subdomain}}.adminolt.com/api/zones/"
+            headers = {
+                "Authorization": "Token {{token}}" 
+            }
+            response = requests.get(url=endpoint, headers=headers)
+            print(response.content)
       security:
         - api_key: []
+    post:
+      tags:
+        - Zones
+      summary: Add a new zone
+      description: Add new zone.
+      operationId: addZone
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zone'
+        '203':
+          description: Non-Authoritative Information
+          content:
+            application/json:
+              example:
+                message_status: "El token enviado no es valido"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                name: [
+                  "Este campo es requerido"
+                ]
+        '401': 
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                detail: "Las credenciales de autenticación no se proveyeron."
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              example:
+                detail: "Metodo {{put,post,get,delete}} no permitido"
+      x-code-samples:
+        - lang: Python
+          source: |
+            import requests
+            endpoint = "https://{{subdomain}}.adminolt.com/api/zones/"
+        
+            headers = {
+                "Authorization": "Token {{token}}" 
+            }
+            
+            data = {
+                "name": "Zone 1",
+                "description": "This is my description"
+            }
+            
+            response = requests.post(url=endpoint, headers=headers, data=data)
+            print(response.content)
+      requestBody:
+        $ref: '#/components/requestBodies/Zone'
+      security:
+      - api_key: []
   '/zones/{zone_id}':
     get:
       tags:
@@ -107,44 +197,46 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Zone'
-      security:
-          - api_key: []
-  /zones/create:
-    post:
-      tags:
-      - Zones
-      summary: Creates a new zone
-      description: Adds a new zone
-      operationId: createZones
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                Name:
-                  description: Name of the zone
-                  type: string
-                Description:
-                  description: Description of the zone
-                  type: string
-        required: true   
-      responses:
-        '200':
-          description: 'Successful Operation'
+        '203':
+          description: Non-Authoritative Information
           content:
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CreateZone'
+              example:
+                message_status: "El token enviado no es valido"      
+        '401': 
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                detail: "Las credenciales de autenticación no se proveyeron."
+        '404': 
+          description: Not Found
+          content:
+            application/json:
+              example:
+                detail: "No encontrado."
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              example:
+                detail: "Metodo {{put,post,get,delete}} no permitido"
+      x-code-samples:
+        - lang: Python
+          source: |
+            import requests
+            endpoint = "https://{{subdomain}}.adminolt.com/api/zones/{{zone_id}}"
+            headers = {
+                "Authorization": "Token {{token}}" 
+            }
+            response = requests.get(url=endpoint, headers=headers)
+            print(response.content)
       security:
-        - api_key: []
-  '/zones/update/{zone_id}':
+          - api_key: []
     put:
       tags:
       - Zones
-      summary: Updates an existing zone
+      summary: Updates an existing zone by ID
       description: 'Modify data of a zone by ID'
       operationId: updateZones
       parameters:
@@ -156,34 +248,71 @@ paths:
             type: integer
             format: number
       requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                Name:
-                  description: Name of the zone
-                  type: string
-                Description:
-                  description: Description of the zone
-                  type: string
-        required: true   
+          $ref: '#/components/requestBodies/Zone'
       responses:
         '200':
-          description: 'Successful Operation'
+          description: successful operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/UpdateZone'
+                  $ref: '#/components/schemas/Zone'
+        '203':
+          description: Non-Authoritative Information
+          content:
+            application/json:
+              example:
+                message_status: "El token enviado no es valido"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                name: [
+                  "Este campo es requerido"
+                ]
+        '401': 
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                detail: "Las credenciales de autenticación no se proveyeron."
+        '404': 
+          description: Not Found
+          content:
+            application/json:
+              example:
+                detail: "No encontrado."
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              example:
+                detail: "Metodo {{put,post,get,delete}} no permitido"
+      x-code-samples:
+        - lang: Python
+          source: |
+            import requests
+            endpoint = "https://{{subdomain}}.adminolt.com/api/zones/{{zone_id}}"
+            
+            headers = {
+                "Authorization": "Token {{token}}" 
+            }
+            
+            data = {
+                "name": "Zone 1",
+                "description": "This is my new description"
+            }
+            
+            response = requests.put(url=endpoint, headers=headers, data=data)
+            print(response.content)
       security:
         - api_key: []
-  '/zones/delete/{zone_id}':
     delete:
       tags:
         - Zones
-      summary: Deletes a zone
+      summary: Deletes a zone by ID
       description: 'Deletes a zone by ID'
       operationId: deleteZone
       parameters:
@@ -199,10 +328,53 @@ paths:
           description: 'Successful Operation'
           content:
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/DeleteZone'
+              example: {
+                "message": "Zona eliminada exitosamente"
+              }
+        '203':
+          description: Non-Authoritative Information
+          content:
+            application/json:
+              example:
+                message_status: "El token enviado no es valido"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                name: [
+                  "Este campo es requerido"
+                ]
+        '401': 
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                detail: "Las credenciales de autenticación no se proveyeron."
+        '404': 
+          description: Not Found
+          content:
+            application/json:
+              example:
+                detail: "No encontrado."
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              example:
+                detail: "Metodo {{put,post,get,delete}} no permitido"
+      x-code-samples:
+        - lang: Python
+          source: |
+            import requests
+            endpoint = "https://{{subdomain}}.adminolt.com/api/zones/{{zone_id}}"
+            
+            headers = {
+                "Authorization": "Token {{token}}" 
+            }
+            
+            response = requests.delete(url=endpoint, headers=headers)
+            print(response.content)
       security:
         - api_key: []
   /pet:
@@ -901,65 +1073,14 @@ components:
           example: 1
         name:
           type: string
-          description: >-
-            Name of Zone
-          # format: password
+          description: Name of Zone
           minLength: 8
-          # pattern: '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])'
           example: Zone 1
-    CreateZone:
-      type: object
-      properties:
-        message:
+        description:
           type: string
-          description: 'Indicates the response'
-          example: 'Zone created successfully'
-        data:
-          description: 'Data of the Zone'
-          type: object
-          properties:
-            id:
-              type: integer
-              description: 'ID of the Zone'
-              example: 1
-            name:
-              type: string
-              description: 'Name of the Zone'
-              example: 'Zone 1'
-            description:
-              type: string
-              description: 'Description of the Zone'
-              example: 'This is my Zone'
-    UpdateZone:
-      type: object
-      properties:
-        message:
-          type: string
-          description: 'Indicates the response'
-          example: 'Zone updated successfully'
-        data:
-          description: 'Data of the Zone'
-          type: object
-          properties:
-            id:
-              type: integer
-              description: 'ID of the Zone'
-              example: 1
-            name:
-              type: string
-              description: 'Name of the Zone'
-              example: 'Zone 1'
-            description:
-              type: string
-              description: 'Description of the Zone'
-              example: 'This is my new Zone'
-    DeleteZone:
-      type: object
-      properties:
-        message:
-          type: string
-          description: 'Indicates the response'
-          example: 'Zone deleted successfully'
+          description: Description of Zone
+          minLength: 8
+          example: This is my Zone
     Pet:
       type: object
       required:
@@ -1085,6 +1206,16 @@ components:
       xml:
         name: User
   requestBodies:
+    Zone:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - description: My Zone
+                  title: Zone
+                - $ref: '#/components/schemas/Zone'
+        description: Zone object that needs to be added to the system
+        required: true
     Pet:
       content:
         application/json:
