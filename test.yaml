@@ -98,7 +98,7 @@ paths:
           content:
             application/json:
               example:
-                detail: "Metodo {{put,post,get,delete}} no permitido"
+                detail: "Metodo {{put,post,delete}} no permitido"
       x-code-samples:
         - lang: Python
           source: |
@@ -117,9 +117,18 @@ paths:
       summary: Add a new zone
       description: Add new zone.
       operationId: addZone
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example: {
+                "name": "Zone 1",
+                "description": "This is my Zone"
+              }
+                
       responses:
-        '200':
-          description: successful operation
+        '201':
+          description: Created
           content:
             application/json:
               schema:
@@ -151,7 +160,7 @@ paths:
           content:
             application/json:
               example:
-                detail: "Metodo {{put,post,get,delete}} no permitido"
+                detail: "Metodo {{put,get,delete}} no permitido"
       x-code-samples:
         - lang: Python
           source: |
@@ -164,13 +173,11 @@ paths:
             
             data = {
                 "name": "Zone 1",
-                "description": "This is my description"
+                "description": "This is my Zone"
             }
             
             response = requests.post(url=endpoint, headers=headers, data=data)
             print(response.content)
-      requestBody:
-        $ref: '#/components/requestBodies/Zone'
       security:
       - api_key: []
   '/zones/{zone_id}':
@@ -220,7 +227,7 @@ paths:
           content:
             application/json:
               example:
-                detail: "Metodo {{put,post,get,delete}} no permitido"
+                detail: "Metodo {{put,post,delete}} no permitido"
       x-code-samples:
         - lang: Python
           source: |
@@ -248,16 +255,23 @@ paths:
             type: integer
             format: number
       requestBody:
-          $ref: '#/components/requestBodies/Zone'
+        content:
+          application/json:
+            schema:
+              example: {
+                "name": "Zone 1-1",
+                "description": "This is my new Zone"
+              }
       responses:
         '200':
-          description: successful operation
+          description: Successful Operation
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Zone'
+                example: {
+                  "name": "Zone 1-1",
+                  "description": "This is my new Zone"
+                }
         '203':
           description: Non-Authoritative Information
           content:
@@ -289,7 +303,7 @@ paths:
           content:
             application/json:
               example:
-                detail: "Metodo {{put,post,get,delete}} no permitido"
+                detail: "Metodo {{post,get,delete}} no permitido"
       x-code-samples:
         - lang: Python
           source: |
@@ -301,7 +315,7 @@ paths:
             }
             
             data = {
-                "name": "Zone 1",
+                "name": "Zone 1-1",
                 "description": "This is my new description"
             }
             
@@ -362,7 +376,7 @@ paths:
           content:
             application/json:
               example:
-                detail: "Metodo {{put,post,get,delete}} no permitido"
+                detail: "Metodo {{put,post,get}} no permitido"
       x-code-samples:
         - lang: Python
           source: |
